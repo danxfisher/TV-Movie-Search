@@ -1,6 +1,6 @@
 # TV Movie Search
 
-Uses (rovi)[http://developer.rovicorp.com/docs] API
+Uses [rovi](http://developer.rovicorp.com/docs) API
 
 ## Deployment
 
