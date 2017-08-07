@@ -1,92 +1,190 @@
 @import url(http://fonts.googleapis.com/css?family=Abel);
 
 body{
-    font-family: 'Abel', sans-serif;
-    background-color: #333;
-    color: #fff;
-    
+  font-family: 'Abel', sans-serif;
+  background-color: #333;
+  color: #fff;
 }
-html{}
+body, html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-/********************/
-/* moviesearch.html */
-/********************/
-#search{
-    padding-top: 20%;
+.container {
+  width: 1000px;
+  margin: 0 auto;
+  margin-top: -80px;
 }
+
+.background-container{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: .2;
+}
+
+.content-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.schedule-container {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.grid {
+
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 1;
+}
+
+.column-border {
+  border-right: 1px solid white;
+}
+
+.grow {
+  flex-grow: 2;
+}
+
+.flexcenter {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  /*justify-content: center;*/
+  align-items: center;
+}
+
+#search, #provider {
+  margin-top: -40px;
+}
+
 #search-top {
-    /*text-align: center;*/
+
 }
-#search-main{}
+
+#search-top h1 {
+  font-size: 72px;
+  padding-top: 0;
+  margin-top: 0;
+}
+
 #search-main table{
-    margin: 0 auto;
-}
-#search-main input[type=text] {
-    background-color: rgba(255, 255, 255, 0.5);
-    border: 1px solid #ffffff;
-    color: #000;
-    padding: 10px;
-    width: 90%;
-}
-#search-main input[type=submit]{
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid #ffffff;
-    color: #fff;
-    text-transform: uppercase;
-    padding: 10px 30px;
+  margin: 0 auto;
 }
 
-/*******************/
-/* movieSearch.php */
-/*******************/
-#process{
-    padding-top: 20%;
-}
-#process-main input[type=submit]{
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid #ffffff;
-    color: #fff;
-    text-transform: uppercase;
-    padding: 10px 30px;
-}
-#process-main select{
-    background-color: rgba(255, 255, 255, 0.5);
-    border: 1px solid #ffffff;
-    color: #000;
-    padding: 10px;
-    width: 100%;
-}
-.options::focus{
-    background-color: rgba(255, 255, 255, 0.5);
+input[type=text] {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  width: 90%;
+  font-size: 55px;
 }
 
-/*******************/
-/* movieSearch.php */
-/*******************/
+#search input::placeholder {
+  -webkit-transition: all 1s, -webkit-transform 1s;
+  transition: all 1s, transform 1s;
+  color: #b2e5c5;
+  font-size: 55px;
+}
+
+#search input:focus::placeholder {
+  color: #777777;
+  font-size: 55px;
+}
+
+#search input[type=submit], button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 5px solid #ffffff;
+  color: #fff;
+  text-transform: uppercase;
+  height: 90px;
+  width: 90px;
+  border-radius: 200px;
+  font-size: 32px;
+  -webkit-transition: all 1s, -webkit-transform 1s;
+  transition: all 1s, transform 1s;
+}
+
+button:hover {
+  border-color: #eead45;
+  color: #eead45;
+}
+
+select {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid #ffffff;
+  color: #000;
+  padding: 10px;
+  width: 90%;
+  font-size: 20px;
+}
+
+.options:focus{
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+#provider-top h1 {
+  font-size: 54px;
+  padding-top: 0;
+  margin-top: 0;
+  padding-bottom: 30px;
+}
+
 #schedule{
-    padding-top: 8%;
+  /*padding-top: 20px;*/
 }
+
 #schedule-top{
-     text-align: center;
+   text-align: center;
 }
+
 #schedule-main h1{
-   
+
 }
+
 #schedule-main table{
-    margin: 0 auto;
+  margin: 0 auto;
+  font-size: 24px;
 }
+
+#schedule-main table td {
+  border-bottom: 1px solid white;
+  padding: 15px 5px;
+}
+
 #schedule-bottom{
-    text-align: center;
-    padding-top: 10%;
+  text-align: center;
+  padding-top: 40px;
 }
 
 /***********/
 /* globals */
 /***********/
 #submit-button{
-    text-align: right;
-    padding-right: 3%;
+  text-align: right;
+  padding-right: 3%;
 }
 .align-right{
-    text-align: right;
+  text-align: right;
 }

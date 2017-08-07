@@ -1,6 +1,6 @@
 <?php
 
-include('sig.php');
+include('sig_rovi.php');
 
 class RoviAPI
 {
@@ -9,31 +9,31 @@ class RoviAPI
     {
         $movieTitle = $_GET['movieTitle'];
         $movieTitle = str_replace(' ', '+', $movieTitle);
-        
+
         //Set movie title session variable
         $_SESSION["movieTitle"] = $movieTitle;
-        
-        $url = "http://api.rovicorp.com/search/v2.1/video/search?apikey=" 
-                . SigGen::getAPIKey() 
-                . "&sig=" . SigGen::createMD5Hash(SigGen::getAPIKey()) 
-                . "&query=" . $movieTitle 
+
+        $url = "http://api.rovicorp.com/search/v2.1/video/search?apikey="
+                . SigGen::getAPIKey()
+                . "&sig=" . SigGen::createMD5Hash(SigGen::getAPIKey())
+                . "&query=" . $movieTitle
                 . "&entitytype=movie&size=1";
         $contents = file_get_contents($url);
 
         return $contents;
     }
-    
+
     //Get JSON for service providers in user requested zipcode
     public static function getZipcodeResult()
     {
         $zipCode = $_GET['zipCode'];
 
-        $url = "http://api.rovicorp.com/TVlistings/v9/listings/services/postalcode/" 
-                . $zipCode 
-                . "/info?locale=en-US&countrycode=US&apikey=" 
-                . SigGen::getTvAPIKey() 
+        $url = "http://api.rovicorp.com/TVlistings/v9/listings/services/postalcode/"
+                . $zipCode
+                . "/info?locale=en-US&countrycode=US&apikey="
+                . SigGen::getTvAPIKey()
                 . "&sig=" . SigGen::createMD5Hash(SigGen::getTvAPIKey());
-        
+
         $contents = file_get_contents($url);
 
         return $contents;
@@ -46,40 +46,40 @@ class RoviAPI
         $movieTitle = str_replace(' ', '+', $movieTitle);
 
         $serviceId = $_GET['serviceProvider'];
-        
-        $url = "http://api.rovicorp.com/data/v1.1/video/schedule?apikey=" 
+
+        $url = "http://api.rovicorp.com/data/v1.1/video/schedule?apikey="
                 . SigGen::getAPIKey()
-                . "&sig=" . SigGen::createMD5Hash(SigGen::getAPIKey()) 
+                . "&sig=" . SigGen::createMD5Hash(SigGen::getAPIKey())
                 . "&video=" . $movieTitle
                 . "&serviceid=" . $serviceId
-                . "&country=US&language=en&count=20";
-        
+                . "&country=US&language=en&count=10";
+
         $contents = file_get_contents($url);
-        
+
         return $contents;
     }
-    
+
     public static function decodeSearchJSON()
     {
         $contents = self::getSearchResult();
         $decodedResult = json_decode($contents, true);
-        
+
         $results = $decodedResult['searchResponse']['results'][0]['video']['masterTitle']; //Movie Title
-        
+
         //echo $results;
     }
-    
+
     public static function decodeZipcodeJSON()
     {
         $contents = self::getZipcodeResult();
         $decodedResult = json_decode($contents, true);
-        
+
         $results = array();
         $c = 0;
-        
+
         if(is_array($decodedResult))
         {
-            foreach($decodedResult['ServicesResult']['Services']['Service'] as $chunk) 
+            foreach($decodedResult['ServicesResult']['Services']['Service'] as $chunk)
             {
                 $serviceID = $chunk['ServiceId'];
                 $providerName = $chunk['Name'];
@@ -93,18 +93,18 @@ class RoviAPI
 
         return $results;
     }
-    
+
     public static function decodeScheduleJSON()
     {
         $contents = self::getScheduleResult();
         $decodedResult = json_decode($contents, true);
-        
+
         $results = array();
         $c = 0;
-        
+
         if(is_array($decodedResult))
         {
-            foreach($decodedResult['schedule']['airings'] as $chunk) 
+            foreach($decodedResult['schedule']['airings'] as $chunk)
             {
                 $TvStation = $chunk['sourceFullName'];
                 $showTime = $chunk['time'];
